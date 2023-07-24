@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <title>Mobile Phone App</title>
+</head>
+<body>
+<h1>Mobile Phone App</h1>
+<button onclick="turnOn()">Turn on</button>
+<button onclick="turnOff()">Turn off</button>
+<button onclick="chargeBattery()">Charging</button>
+<br><br>
+<label for="composeMessage"></label><textarea id="composeMessage" placeholder="typing"></textarea>
+<button onclick="sendMessage()">Mes Sent</button>
+<br><br>
+<button onclick="viewInbox()">Inbox</button>
+<button onclick="viewSent()">Outbox</button>
+<br><br>
+<h2>Pin: <span id="batteryStatus">100</span> % </h2>
+
+<script>
+  let powerOn = false;
+  let battery = 100;
+  let inbox = [];
+  let sent = [];
+
+  function updateBatteryStatus() {
+    document.getElementById("batteryStatus").innerText = battery;
+  }
+
+  function isPowerOn() {
+    return powerOn;
+  }
+
+  function turnOn() {
+    if (!powerOn) {
+      powerOn = true;
+      alert("Hello");
+    } else {
+      alert("Good Bye");
+    }
+  }
+
+  function turnOff() {
+    if (powerOn) {
+      powerOn = false;
+      alert("Phone has been turned off");
+    } else {
+      alert("Phone has been turned off before");
+    }
+  }
+
+  function chargeBattery() {
+    if (powerOn) {
+      if (battery < 100) {
+        battery += 10;
+        if (battery > 100) {
+          battery = 100;
+        }
+        alert("Charging" + battery + " % ");
+        updateBatteryStatus();
+      } else {
+        alert("Max");
+      }
+    } else {
+      alert("Turn on before charging");
+    }
+  }
+
+  function sendMessage() {
+    if (powerOn) {
+      let message = document.getElementById("composeMessage").value;
+      if (battery >= 1) {
+        let mobile = { receiveMessage: receiveMessage, isPowerOn: isPowerOn };
+        if (mobile.isPowerOn()) {
+          mobile.receiveMessage(message);
+          sent.push(message);
+          battery -= 1;
+          updateBatteryStatus();
+        } else {
+          alert("Can't Send");
+        }
+      } else {
+        alert("Low Battery");
+      }
+    } else {
+      alert("Turn on before typing");
+    }
+  }
+
+  function receiveMessage(message) {
+    inbox.push(message);
+    battery -= 1;
+    updateBatteryStatus();
+  }
+
+  function viewInbox() {
+    if (powerOn) {
+      if (inbox.length > 0) {
+        alert("inbox :\n" + inbox.join("\n"));
+      } else {
+        alert("None");
+      }
+    } else {
+      alert("Turn on before checking inbox");
+    }
+  }
+
+  function viewSent() {
+    if (powerOn) {
+      if (sent.length > 0) {
+        alert("sented:\n" + sent.join("\n"));
+      } else {
+        alert("NO");
+      }
+    } else {
+      alert("Turn on berofe check ");
+    }
+  }
+</script>
+</body>
+</html>
