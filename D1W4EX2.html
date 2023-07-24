@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xây Dựng Lớp Hình Tròn</title>
+</head>
+<body>
+<script>
+  let circle = function (radius) {
+    this.radius = radius;
+    this.getradius = function () {
+      return radius;
+    }
+    this.getarea = function (){
+      return Math.PI * radius * radius;
+    }
+  };
+let Cirle = new circle(55);
+let radius = Cirle.getradius();
+let area = Cirle.getarea();
+alert("radius:" + radius +"; area:" + area);
+</script>
+</body>
+</html>
