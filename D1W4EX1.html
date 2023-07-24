@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xây dựng lớp DATE</title>
+</head>
+<body>
+<script>
+  let Birhtday = function (day,month,yeah) {
+    this.day = day;
+    this.month = month;
+    this.year = yeah;
+    this.getDay = function (){
+      return this.day;
+    }
+    this.getMonth = function (){
+      return this.month;
+    }
+    this.getYear = function (){
+      return this.year;
+    }
+  };
+  let date = new  Birhtday(26, 10, 1997 );
+  let day = date.getDay();
+  let month = date.getMonth();
+  let year = date.getYear();
+alert(day + "/" + month + "/" + year);
+</script>
+</body>
+</html>
